@@ -18,6 +18,8 @@
         <div data-key="75" class="key"><kbd>K </kbd><span class="sound">tom</span></div>
         <div data-key="76" class="key"><kbd>L</kbd><span class="sound">tink</span></div>
     </div>
+
+
     <audio data-key="65" src="Sounds/clap.wav"></audio>
     <audio data-key="83" src="Sounds/hihat.wav"></audio>
     <audio data-key="68" src="Sounds/kick.wav"></audio>
@@ -27,5 +29,32 @@
     <audio data-key="74" src="Sounds/snare.wav"></audio>
     <audio data-key="75" src="Sounds/tom.wav"></audio>
     <audio data-key="76" src="Sounds/tink.wav"></audio>
+
+    <script>
+        function playSound(e){
+            // console.log(e.keyCode)
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            // console.log(key);
+            // console.log(audio)
+            if(!audio) return;//if there is no audio(or u can say key) associate with the key// stop the function from running
+            audio.currentTime = 0;//to start over and over again when hit in succession
+            audio.play();//if there is audio element play it
+
+            key.classList.add("playing");
+
+        }
+        function removeTransition(e){
+            if(e.propertyName !== "transform") return;
+            this.classList.remove("playing");
+        }
+
+        const keys = document.querySelectorAll(".key");
+        keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+
+        window.addEventListener("keydown", playSound);
+
+    </script>
 </body> 
 </html>
