@@ -51,10 +51,11 @@
       function playSound(e) {
         let keyCode;
 
+        // Check the event type and set keyCode accordingly
         if (e.type === "keydown") {
           keyCode = e.keyCode;
         } else if (e.type === "click") {
-          keyCode = e.currentTarget.dataset.key;
+          keyCode = e.currentTarget.dataset.key;// For click events, get the data-key attribute of the clicked element
         }
 
         // console.log(e.keyCode)
@@ -64,7 +65,7 @@
         // console.log(key);
         // console.log(audio)
         if (!audio) return; //if there is no audio(or u can say key) associate with the key// stop the function from running
-        audio.currentTime = 0; //to start over and over again when hit in succession
+        audio.currentTime = 0; //to start over and over again when hit in succession(Rewind to the start)
         audio.play(); //if there is audio element play it
 
         key.classList.add("playing");
@@ -75,11 +76,10 @@
       }
 
       const keys = document.querySelectorAll(".key");
+      // Add click event listener to each key element
       keys.forEach((key) => key.addEventListener("click", playSound));
-
-      keys.forEach((key) =>
-        key.addEventListener("transitionend", removeTransition)
-      );
+      // Add transitionend event listener to each key element
+      keys.forEach((key) => key.addEventListener("transitionend", removeTransition));
 
       window.addEventListener("keydown", playSound);
     </script>
