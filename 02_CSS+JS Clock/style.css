@@ -19,7 +19,7 @@ body {
   position: relative;
   width: 98%;
   height: 100%;
-  transform: translateY(-3px);
+  /* transform: translateY(-3px); */
 }
 .hand {
   width: 50%;
